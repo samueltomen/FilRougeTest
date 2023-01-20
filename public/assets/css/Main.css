@@ -828,6 +828,10 @@ hr {
     }
 }
 
+.activeLink{
+    color: #51ade5 !important;
+}
+
 /* 
 Desktop : au delà de 1024 pixels
 Tablette : entre 600 et 1024 pixels (en mode portrait)
