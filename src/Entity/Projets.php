@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ProjetsRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProjetsRepository::class)]
 class Projets
@@ -15,12 +16,16 @@ class Projets
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 10, max: 80)]
     private ?string $title = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 20, max: 350)]
     private ?string $description = null;
 
     #[ORM\Column]
