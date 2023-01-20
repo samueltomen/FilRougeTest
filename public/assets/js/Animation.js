@@ -1,84 +1,60 @@
-const activeLink = (e)=>{
-    const id = e.target.id
-    const idArray = ["1","2","3"]
+const activeLink = (e) => {
+    const id = e.target.id;
+    const idArray = ['1', '2', '3'];
 
-    idArray.forEach((element)=> {
-        document.getElementById(element).classList.remove("active")
+    idArray.forEach((element) => {
+        document.getElementById(element).classList.remove('active');
     });
-    document.getElementById(id).classList.add("active")
-}
-
+    document.getElementById(id).classList.add('active');
+};
 
 // Scroll Animation
-window.addEventListener('scroll', checkBoxes)
+window.addEventListener('scroll', checkBoxes);
 
-checkBoxes()
+checkBoxes();
 
-function checkBoxes (){
-  const boxes = document.querySelectorAll('.box')
-  const triggerBottom = (window.innerHeight / 9 * 8 )
-  boxes.forEach(box => {
+function checkBoxes() {
+    const boxes = document.querySelectorAll('.box');
+    const triggerBottom = (window.innerHeight / 9) * 8;
+    boxes.forEach((box) => {
+        const boxTop = box.getBoundingClientRect().top;
 
-    const boxTop = box.getBoundingClientRect().top
-
-    if(boxTop < triggerBottom){
-      box.classList.add('show');
-    }else{
-      box.classList.remove('show')
-    }
-  })
+        if (boxTop < triggerBottom) {
+            box.classList.add('show');
+        } else {
+            box.classList.remove('show');
+        }
+    });
 }
 
 // On load animation
 
+function effectLoadScreen() {
+    const loadScreen = document.querySelectorAll('.screenLoad');
+    const loadAnimation = (e) => {
+        const id = e.target.id;
+        const idArray = ['h1', 'p1'];
 
-function effectLoadScreen(){
+        idArray.forEach((element) => {
+            document.getElementById(element).classList.remove('loading');
+        });
+        document.getElementById(id).classList.add('loading');
+    };
+}
 
-    const loadScreen = document.querySelectorAll('.screenLoad')
-    const loadAnimation = (e)=>{
-      const id = e.target.id
-      const idArray = ["h1","p1"]
-  
-      idArray.forEach((element)=> {
-          document.getElementById(element).classList.remove("loading")
-      });
-      document.getElementById(id).classList.add("loading")
-  }
-
-  
-  }
-
-  function activeCardsNosProjets() {
+function activeCardsNosProjets() {
     const id = 2;
-    const idArray = ["1","2","3"];
-    window.scroll(0,0);
-  
-    idArray.forEach((element)=> {
-        document.getElementById(element).classList.remove("active");
+    const idArray = ['1', '2', '3'];
+    window.scroll(0, 0);
+
+    idArray.forEach((element) => {
+        document.getElementById(element).classList.remove('active');
     });
-    document.getElementById(id).classList.add("active");
-  }
+    document.getElementById(id).classList.add('active');
+}
 
-  // Scroll Animation
+// MET EN SURBRILLANCE TOUS LES LIENS DE LA NAVBAR ACTIVE
 
 
-// window.addEventListener('load', screenLoad)
-
-// function screenLoad (){
-//   const boxes = document.querySelectorAll('.screenLoad')
-//   const triggerBottom = window.innerHeight/1*1
-//   boxes.forEach(box => {
-
-//     const boxTop = box.getBoundingClientRect().top
-
-//     if(boxTop < triggerBottom){
-//       box.classList.add('loading');
-//     }else{
-//       box.classList.remove('loading');
-//     }
-//   })
-// }
 
 //////////////////////////////// Boutton retour en haut de la page ///////////////////////
-
-

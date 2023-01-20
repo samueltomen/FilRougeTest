@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Nos Projets - Harpie
+{% endblock %}
+
+{% block body %}
+    <div id="ourprojects" class="my-5">
+        <h1>
+            NOS PROJETS
+        </h1>
+        <div class="row justify-content-center">
+            <div class="container">
+                <div class="row col-12">
+                    {% for projet in projets %}
+                        <div class="col-lg-4 d-flex justify-content-center">
+                            <div class="card mb-4">
+                                <img class="card-img-top" src="{{projet.image}}" />
+                                <div class="card-body d-flex align-items-center flex-column">
+                                    <h5 class="card-title text-center">{{projet.title}}</h5>
+                                    <p class="card-text text-center pt-3">
+                                        <small class="text-muted">
+                                            Publié le : {{projet.createdAt|date("d/m/Y")}}
+                                        </small>
+                                    </p>
+                                    <p class="card-text text-center">{{projet.description}}</p>
+                                    <p class="card-text text-center">
+                                        <small class="text-muted">
+                                            Mise à jour le {{projet.updatedAt|date("jS F \\a\\t g:ia","Europe/Paris")}}
+                                        </small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
