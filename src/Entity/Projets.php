@@ -22,6 +22,14 @@ class Projets
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
+    }
 
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\NotBlank]
