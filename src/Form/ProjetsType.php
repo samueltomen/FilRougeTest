@@ -46,24 +46,21 @@ class ProjetsType extends AbstractType
                 ],
             ])
             ->add('image', FileType::class, [
-                'label' => 'Votre Image',
+                'attr' => [
+                    'class' => 'form-control mb-4',
+                ],
                 'label_attr' => [
                     'class' => 'form-label mt-4',
                 ],
                 'constraints' => [
                     new File([
                         'maxSize' => '5000k',
-                        'mimeTypes' => [
-                            'application/png',
-                            'application/jpg',
-                            'application/jpeg',
-                        ],
-                        'mimeTypesMessage' => 'Please upload a valid PNG file',
                     ]),
                 ],
             ])
-            ->add('save', SubmitType::class, [
-                'attr' => ['class' => 'btn btn-secondary mt-4'],
+            ->add('submit', SubmitType::class, [
+                'attr' => ['class' => 'btn btn-secondary my-4 '],
+                'label' => 'Créer un nouveau un projet',
             ]);
     }
 
