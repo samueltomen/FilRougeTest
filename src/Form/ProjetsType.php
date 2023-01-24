@@ -9,7 +9,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\File;
@@ -46,6 +45,8 @@ class ProjetsType extends AbstractType
                 ],
             ])
             ->add('image', FileType::class, [
+                'required' => false,
+                'mapped' => false,
                 'attr' => [
                     'class' => 'form-control mb-4',
                 ],
@@ -55,6 +56,9 @@ class ProjetsType extends AbstractType
                 'constraints' => [
                     new File([
                         'maxSize' => '5000k',
+                        'mimeTypes' => ['image/jpeg', 'image/png'],
+                        'mimeTypesMessage' =>
+                            'Please upload a valid image file',
                     ]),
                 ],
             ])
