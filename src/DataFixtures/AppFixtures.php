@@ -2,11 +2,13 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\User;
 use Faker\Factory;
 use Faker\Generator;
 use App\Entity\Projets;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
@@ -31,7 +33,23 @@ class AppFixtures extends Fixture
                 ->setImage('./assets/img/image_card_' . $number . 'r.png');
             $manager->persist($projet);
         }
-        
+
+        //USERS
+        for ($i = 0; $i < 5; $i++) {
+            $user = new User();
+            $user
+                ->setFirstName($this->faker->firstName())
+                ->setLastName($this->faker->lastName())
+                ->setPseudo(
+                    mt_rand(0, 1) === 1 ? $this->faker->firstName() : null
+                )
+                ->setEmail($this->faker->email())
+                ->setRoles(['ROLE_USER'])
+                ->setPlainPassword('password');
+
+            $manager->persist($user);
+        }
+
         $manager->flush();
     }
 }
