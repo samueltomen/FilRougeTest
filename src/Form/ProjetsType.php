@@ -58,13 +58,13 @@ class ProjetsType extends AbstractType
                         'maxSize' => '5000k',
                         'mimeTypes' => ['image/jpeg', 'image/png'],
                         'mimeTypesMessage' =>
-                            'Please upload a valid image file',
+                        'Please upload a valid image file',
                     ]),
                 ],
             ])
             ->add('submit', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-secondary my-4 '],
-                'label' => 'Créer un nouveau un projet',
+                'label' => 'Valider',
             ]);
     }
 

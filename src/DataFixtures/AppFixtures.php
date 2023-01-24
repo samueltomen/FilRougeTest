@@ -22,15 +22,16 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         for ($i = 1; $i <= 6; $i++) {
-            # code...
+            $number = 0;
+            $number++;
             $projet = new Projets();
             $projet
                 ->setTitle($this->faker->sentence(5))
                 ->setDescription($this->faker->text(200))
-                ->setImage($this->faker->imageUrl(640,480,'children', true));
+                ->setImage('./assets/img/image_card_' . $number . 'r.png');
             $manager->persist($projet);
         }
-
+        
         $manager->flush();
     }
 }

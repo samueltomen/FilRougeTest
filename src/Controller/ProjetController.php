@@ -7,7 +7,6 @@ use App\Form\ProjetsType;
 use App\Repository\ProjetsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,17 +27,28 @@ class ProjetController extends AbstractController
         Request $request,
         EntityManagerInterface $manager
     ): Response {
-        $projet = new Projets();
-        $form = $this->createForm(ProjetsType::class, $projet);
+        $projets = new Projets();
+        $form = $this->createForm(ProjetsType::class, $projets);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $imageFile = $form->get('image')->getData();
             if ($imageFile) {
-                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
+                $originalFilename = pathinfo(
+                    $imageFile->getClientOriginalName(),
+                    PATHINFO_FILENAME
+                );
+                $safeFilename = transliterator_transliterate(
+                    'Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()',
+                    $originalFilename
+                );
+                $newFilename =
+                    $safeFilename .
+                    '-' .
+                    uniqid() .
+                    '.' .
+                    $imageFile->guessExtension();
 
                 try {
                     $imageFile->move(
@@ -48,10 +58,10 @@ class ProjetController extends AbstractController
                 } catch (FileException $e) {
                     // ... handle exception if something happens during file upload
                 }
-                $projet->setImage($newFilename);
+                $projets->setImage($newFilename);
             }
-            $projet = $form->getData();
-            $manager->persist($projet);
+            $projets = $form->getData();
+            $manager->persist($projets);
             $manager->flush();
 
             $this->addFlash('success', 'Votre projet à été créé avec succès');
@@ -67,16 +77,79 @@ class ProjetController extends AbstractController
     #[
         Route(
             '/projet/edition/{id}',
-            name:'projet_edit',
+            name: 'projet_edit',
             methods: ['GET', 'POST']
         )
     ]
-    public function edit(ProjetsRepository $repository,Request $request,EntityManagerInterface $entityManager, int $id): Response
-    {
-        $projet = $repository->findOneBy(["id" => $id]);
-        $form = $this->createForm(ProjetsType::class, $projet);
-        return $this->render('projet/edit.html.twig',[
+    public function edit(
+        Projets $projets,
+        Request $request,
+        EntityManagerInterface $manager
+    ): Response {
+        $form = $this->createForm(ProjetsType::class, $projets);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form->get('image')->getData();
+            if ($imageFile) {
+                $originalFilename = pathinfo(
+                    $imageFile->getClientOriginalName(),
+                    PATHINFO_FILENAME
+                );
+                $safeFilename = transliterator_transliterate(
+                    'Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()',
+                    $originalFilename
+                );
+                $newFilename =
+                    $safeFilename .
+                    '-' .
+                    uniqid() .
+                    '.' .
+                    $imageFile->guessExtension();
+
+                try {
+                    $imageFile->move(
+                        $this->getParameter('upload_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+                $projets->setImage($newFilename);
+            }
+            $projets = $form->getData();
+            $manager->persist($projets);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                'Votre projet à été modifié avec succès'
+            );
+
+            return $this->redirectToRoute('app_projets');
+        }
+
+        $form = $this->createForm(ProjetsType::class, $projets);
+
+        return $this->render('projet/edit.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    #[Route('/projet/delete/{id}', name: 'projet_delete', methods: ['GET'])]
+    public function delete(
+        EntityManagerInterface $manager,
+        Projets $projets
+    ): Response {
+        if (!$projets) {
+            $this->addFlash('danger', '404 Projet not found !');
+            return $this->redirectToRoute('app_projets');
+        }
+
+        $manager->remove($projets);
+        $manager->flush();
+
+        $this->addFlash('danger', 'Votre projet à été supprimé');
+        return $this->redirectToRoute('app_projets');
     }
 }
