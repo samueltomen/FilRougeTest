@@ -141,11 +141,7 @@ class ProjetController extends AbstractController
         EntityManagerInterface $manager,
         Projets $projets
     ): Response {
-        if (!$projets) {
-            $this->addFlash('danger', '404 Projet not found !');
-            return $this->redirectToRoute('app_projets');
-        }
-
+        
         $manager->remove($projets);
         $manager->flush();
 
