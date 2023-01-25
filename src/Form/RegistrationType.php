@@ -86,6 +86,7 @@ class RegistrationType extends AbstractType
                 'label_attr' => [
                     'class' => 'form-label mt-2',
                 ],
+                'required' =>false,
                 'constraints' => [new Assert\Length(['min' => 2, 'max' => 50])],
             ])
             // -------------------------------------------------- PASSWORD

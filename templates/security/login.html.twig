@@ -7,7 +7,7 @@
 {% block body %}
     <div class="container">
         <h1 class="my-5">
-            Formulaire de Connexion
+            CONNEXION
         </h1>
         {% if error %}
             <div class="alert alert-danger"
@@ -15,33 +15,38 @@
                 {{ error.messageKey|trans(error.messageData, 'security') }}
             </div>
         {% endif %}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success text-center mx-auto col-md-8 mt-4">
+                {{ message }}
+            </div>
+        {% endfor %}
         <form action="{{ path('app_login') }}"
             method="post"
-            class="my-5 py-5 d-flex flex-column align-items-center mx-auto col-8">
-            <div class="mb-3 col-md-4">
+            class="my-5 py-5 d-flex flex-column align-items-center mx-auto col-md-6">
+            <div class="m-2 w-100">
                 <label for="username" class="form-label text-center">
                     Adresse Email
                 </label>
                 <input type="email"
-                    class="form-control rounded-3"
+                    class="form-control rounded-3 w-100"
                     name="_username"
                     id="username"
                     aria-describedby="emailHelpId"
                     placeholder="Entrez votre adresse mail"
                     value="{{ last_username }}" />
             </div>
-            <div class="mb-3 col-md-4">
+            <div class="m-2 w-100">
                 <label for="password" class="form-label text-center">
                     Mot de passe
                 </label>
                 <input type="password"
-                    class="form-control rounded-3"
+                    class="form-control rounded-3 w-100"
                     name="_password"
                     id="password"
                     placeholder="Entrez votre mot de passe" />
             </div>
 
-            <button class="btn btn-secondary mt-4 col-md-2" type="submit">
+            <button class="btn btn-secondary mt-5 col-md-8" type="submit">
                 Se connecter
             </button>
         </form>
