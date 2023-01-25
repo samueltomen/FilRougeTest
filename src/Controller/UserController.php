@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\UserPasswordType;
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -45,7 +46,6 @@ class UserController extends AbstractController
                     $form->getData()->getPlainPassword()
                 )
             ) {
-            
                 $user = $form->getData();
                 $manager->persist($user);
                 $manager->flush();
@@ -55,15 +55,27 @@ class UserController extends AbstractController
                     'Vos informations ont bien été modifiés '
                 );
                 return $this->redirectToRoute('app_projets');
-            }else{
-                $this->addFlash(
-                    'danger',
-                    'Le mot de passe renseigné est incorrect'
-                );
+            } else {
+                $this->addFlash('danger', 'Le mot de passe est incorrect');
             }
         }
 
         return $this->render('user/edit.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[
+        Route(
+            '/utilisateur/edition-mot-de-passe/{id}',
+            'app_user_password',
+            methods: ['GET', 'POST']
+        )
+    ]
+    public function editPassword(User $user, Request $request): Response
+    {
+        $form = $this->createForm(UserPasswordType::class);
+        return $this->render('user/edit_password.html.twig', [
             'form' => $form->createView(),
         ]);
     }
