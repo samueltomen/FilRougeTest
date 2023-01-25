@@ -73,9 +73,6 @@ a:-webkit-any-link {
 
 #navbarlink .nav-item a:hover {
     color: #51ade5;
-    /* font-size: 1.5rem; */
-    /* transition: all ease-in-out 0.3s; */
-    /* transform:scaleY(1); */
 }
 
 /* ----------------------- Début du main container --------------- */
@@ -182,7 +179,6 @@ a:-webkit-any-link {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* height: 280vh; */
     align-items: center;
     row-gap: 10vh;
 }
@@ -244,10 +240,8 @@ a:-webkit-any-link {
     background-size: cover;
     background-position: 25%;
     margin-top: 5em;
-    /* min-height: 180vh; */
     display: flex;
     flex-direction: column;
-    /* justify-content: space-evenly; */
     align-items: center;
     padding: 0px 1em;
     row-gap: 10vh;
@@ -328,17 +322,6 @@ a:-webkit-any-link {
 
 /* ---------------- OUR STORY ---------------------- */
 
-/* .our_stories{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    background-color: #51ade5;
-    text-align: center;
-    margin: 0px 60px;
-    transform: translateY(20px);
-    color: #ffffff;
-} */
 
 .our_stories_title {
     text-align: center;
@@ -410,16 +393,6 @@ a:-webkit-any-link {
     background-color: #51ade5;
 }
 
-/* For Next & Previous Img */
-/* .left{
-    color: #4b4949;
-    font-weight: 600;
-}
-.right{
-    color:#4b4949
-    font-weight: 600;
-} */
-
 .carousel-control-next,
 .carousel-control-prev {
     position: relative;
@@ -435,7 +408,6 @@ a:-webkit-any-link {
     flex-direction: column;
     align-content: center;
     justify-content: center;
-    /* height: 20vh; */
     background-color: #51ade5;
 }
 
@@ -474,7 +446,6 @@ footer a:hover {
 }
 footer {
     padding-top: 50px;
-    /* height: 65vh; */
     display: flex;
     flex-flow: wrap;
     align-items: center;
@@ -534,12 +505,6 @@ hr {
         text-transform: uppercase;
     }
 
-    /* .right{
-        font-size: 12px;
-    }
-    .left{
-        font-size: 12px;
-    } */
     .carousel-indicators [data-bs-target] {
         height: 8px;
         border: 1px solid #4b4949;
@@ -591,7 +556,6 @@ hr {
 
     .projects {
         justify-content: space-evenly;
-        /* height: 200vh; */
     }
     .projects h2 {
         margin-right: 70%;
@@ -615,7 +579,6 @@ hr {
     /*-- Le saviez vous-- */
 
     .didyouknow {
-        /* height: 180vh; */
         display: flex;
         flex-direction: row;
         column-gap: 20px;
@@ -628,8 +591,6 @@ hr {
     .didyouknow_title h1 {
         display: flex;
         padding: 0px !important;
-        /* width: 40%; */
-        /* justify-content: space-evenly; */
     }
 
     .didyouknow_title {
@@ -687,9 +648,7 @@ hr {
         min-width: 300px;
         max-width: 300px;
     }
-    /* .projects img{
-        max-width: 50vh;
-    } */
+
 
     .carousel-item {
         transition: transform 0.6s ease-in-out;
