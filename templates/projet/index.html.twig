@@ -19,11 +19,13 @@
         <h1>
             NOS PROJETS
         </h1>
-        <div class="btn_create text-center mt-5">
-            <a href="{{ path('projet_new') }}" class="btn btn-secondary">
-                Créer un nouveau projet
-            </a>
-        </div>
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="btn_create text-center mt-5">
+                <a href="{{ path('projet_new') }}" class="btn btn-secondary">
+                    Créer un nouveau projet
+                </a>
+            </div>
+        {% endif %}
         <div class="row justify-content-center">
             <div class="container">
                 <div class="row col-12">
@@ -49,32 +51,33 @@
                                             Mise à jour le {{ projet.updatedAt|date('jS F \\a\\t g:ia', 'Europe/Paris') }}
                                         </small>
                                     </p>
-                                    <div class="btn-crud d-flex mx-auto">
-                                        <a href="{{
-                                            path(
-                                                'projet_edit',
-                                                {
-                                                    id: projet.id
-                                                }
-                                            )
-                                            }}"
-                                            class="btn btn-dark my-auto mx-1">
-                                            Modifier
-                                        </a>
-                                        <a href="{{
-                                            path(
-                                                'projet_delete',
-                                                {
-                                                    id: projet.id
-                                                }
-                                            )
-                                            }}"
-                                            onclick="return confirm('Voulez vous vraiment supprimez ce projet ?');"
-                                            class="btn btn-danger mx-1"
-                                            >
-                                            Supprimer
-                                        </a>
-                                    </div>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                        <div class="btn-crud d-flex mx-auto">
+                                            <a href="{{
+                                                path(
+                                                    'projet_edit',
+                                                    {
+                                                        id: projet.id
+                                                    }
+                                                )
+                                                }}"
+                                                class="btn btn-dark my-auto mx-1">
+                                                Modifier
+                                            </a>
+                                            <a href="{{
+                                                path(
+                                                    'projet_delete',
+                                                    {
+                                                        id: projet.id
+                                                    }
+                                                )
+                                                }}"
+                                                onclick="return confirm('Voulez vous vraiment supprimez ce projet ?');"
+                                                class="btn btn-danger mx-1">
+                                                Supprimer
+                                            </a>
+                                        </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>

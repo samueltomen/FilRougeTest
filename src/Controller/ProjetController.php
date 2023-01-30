@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class ProjetController extends AbstractController
 {
@@ -23,6 +24,7 @@ class ProjetController extends AbstractController
     }
 
     #[Route('/projet/nouveau', 'projet_new', methods: ['GET', 'POST'])]
+    // #[IsGranted('ROLE_ADMIN')]
     public function new(
         Request $request,
         EntityManagerInterface $manager

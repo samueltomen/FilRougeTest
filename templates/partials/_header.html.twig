@@ -16,8 +16,13 @@
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mon profil</a>
 						<div class="dropdown-menu" aria-labelledby="dropdownId">
+						{% if app.user %}
+							 <a href="{{ path("app_login") }}" class="dropdown-item">Mon compte</br><small>({% if app.user.pseudo %}{{ app.user.pseudo }}{% else %}{{ app.user.firstname }}{% endif %})</small></a>
+							 <a href="{{ path("app_logout") }}" class="dropdown-item">Déconnexion</a>
+							{% else %}
 							<a class="dropdown-item" href="{{path('app_login')}}">Se connecter</a>
 						    <a class="dropdown-item" href="{{path('app_registration')}}">S'inscrire</a>
+						{% endif %}
 						</div>
 					</li>
 					
