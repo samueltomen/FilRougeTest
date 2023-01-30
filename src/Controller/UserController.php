@@ -72,9 +72,37 @@ class UserController extends AbstractController
             methods: ['GET', 'POST']
         )
     ]
-    public function editPassword(User $user, Request $request): Response
-    {
+    public function editPassword(
+        User $user,
+        Request $request,
+        EntityManagerInterface $manager,
+        UserPasswordHasherInterface $hasher
+    ): Response {
         $form = $this->createForm(UserPasswordType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // dd($user);
+            if (
+                $hasher->isPasswordValid(
+                    $user,
+                    $form->getData()['plainPassword']
+                )
+            ) {
+                $user->setPassword($hasher->hashPassword($user, $form->getData()['newPassword']));
+
+                $this->addFlash(
+                    'success',
+                    'Le mot de passe a bien été modifié'
+                );
+                $manager->persist($user);
+                $manager->flush();
+
+                return $this->redirectToRoute('app_home');
+            } else {
+                $this->addFlash('warning', 'Le mot de passe est incorrect');
+            }
+        }
         return $this->render('user/edit_password.html.twig', [
             'form' => $form->createView(),
         ]);
