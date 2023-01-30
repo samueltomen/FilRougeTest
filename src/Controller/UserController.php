@@ -78,18 +78,18 @@ class UserController extends AbstractController
         EntityManagerInterface $manager,
         UserPasswordHasherInterface $hasher
     ): Response {
-        $form = $this->createForm(UserPasswordType::class);
+        $form = $this->createForm(UserPasswordType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // dd($user);
             if (
                 $hasher->isPasswordValid(
                     $user,
-                    $form->getData()['plainPassword']
+                    $form->getData()->getPlainPassword()
                 )
             ) {
-                $user->setPassword($hasher->hashPassword($user, $form->getData()['newPassword']));
+                $user->setCreatedAt(new \DateTimeImmutable());
+                $user->setPlainPassword($form->get('newPassword')->getData());
 
                 $this->addFlash(
                     'success',
@@ -98,7 +98,7 @@ class UserController extends AbstractController
                 $manager->persist($user);
                 $manager->flush();
 
-                return $this->redirectToRoute('app_home');
+                return $this->redirectToRoute('app_login');
             } else {
                 $this->addFlash('warning', 'Le mot de passe est incorrect');
             }
