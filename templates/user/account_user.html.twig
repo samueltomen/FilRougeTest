@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block body %}
+    <h1 class="my-5 text-decoration-none text-black-50 border py-4 border-black">Bienvenue sur votre compte {% if app.user.pseudo %}{{ app.user.pseudo }}{% else %}{{ app.user.firstname }}{% endif %}</h1>
     <div class="container d-flex col-md-12">
         {% include 'partials/_side_barUser.html.twig' %}
         <div class="col-md-8 my-5">
