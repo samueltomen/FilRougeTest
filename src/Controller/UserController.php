@@ -109,4 +109,28 @@ class UserController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+    #[
+        Route(
+            '/utilisateur/mon-compte/{id}',
+            name: 'app_account',
+            methods: ['GET', 'POST']
+        )
+    ]
+    
+    public function account(
+        User $user,
+        Request $request,
+        EntityManagerInterface $manager,
+        UserPasswordHasherInterface $hasher
+    ): Response {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+
+        if ($this->getUser() !== $user) {
+            return $this->redirectToRoute('app_user');
+        }
+
+        return $this->render('user/account_user.html.twig');
+    }
 }
