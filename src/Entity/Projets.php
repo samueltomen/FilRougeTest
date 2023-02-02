@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProjetsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -31,6 +33,7 @@ class Projets
     {
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTimeImmutable();
+        $this->marks = new ArrayCollection();
     }
 
     #[ORM\Column(type: Types::TEXT)]
@@ -43,6 +46,9 @@ class Projets
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
+
+    #[ORM\OneToMany(mappedBy: 'projet', targetEntity: Mark::class, orphanRemoval: true)]
+    private Collection $marks;
 
     public function getId(): ?int
     {
@@ -105,6 +111,36 @@ class Projets
     public function setImage(string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Mark>
+     */
+    public function getMarks(): Collection
+    {
+        return $this->marks;
+    }
+
+    public function addMark(Mark $mark): self
+    {
+        if (!$this->marks->contains($mark)) {
+            $this->marks->add($mark);
+            $mark->setProjet($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMark(Mark $mark): self
+    {
+        if ($this->marks->removeElement($mark)) {
+            // set the owning side to null (unless already changed)
+            if ($mark->getProjet() === $this) {
+                $mark->setProjet(null);
+            }
+        }
 
         return $this;
     }

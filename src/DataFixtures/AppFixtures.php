@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Mark;
 use App\Entity\User;
 use Faker\Factory;
 use Faker\Generator;
@@ -23,18 +24,23 @@ class AppFixtures extends Fixture
     }
     public function load(ObjectManager $manager): void
     {
+        $number = 0;
+        $projets = [];
         for ($i = 1; $i <= 6; $i++) {
-            $number = 0;
             $number++;
             $projet = new Projets();
             $projet
                 ->setTitle($this->faker->sentence(5))
                 ->setDescription($this->faker->text(200))
                 ->setImage('./assets/img/image_card_' . $number . 'r.png');
+
+            $projets[] = $projet;
             $manager->persist($projet);
         }
 
         //USERS
+
+        $users = [];
         for ($i = 0; $i < 5; $i++) {
             $user = new User();
             $user
@@ -46,8 +52,21 @@ class AppFixtures extends Fixture
                 ->setEmail($this->faker->email())
                 ->setRoles(['ROLE_USER'])
                 ->setPlainPassword('password');
-
+            $users[] = $user;
             $manager->persist($user);
+        }
+
+        //Mark
+        foreach ($projets as $projet) {
+            for ($i = 0; $i < mt_rand(0, 4); $i++) {
+                $mark = new Mark();
+                $mark
+                    ->setMark(mt_rand(1, 5))
+                    ->setUser($users[mt_rand(0, count($users) - 1)])
+                    ->setProjet($projet);
+
+                $manager->persist($mark);
+            }
         }
 
         $manager->flush();
