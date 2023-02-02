@@ -36,6 +36,7 @@ class UserController extends AbstractController
         if ($this->getUser() !== $user) {
             return $this->redirectToRoute('app_user');
         }
+        
 
         $form = $this->createForm(UserType::class, $user);
 
@@ -123,6 +124,7 @@ class UserController extends AbstractController
         EntityManagerInterface $manager,
         UserPasswordHasherInterface $hasher
     ): Response {
+        
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
         }

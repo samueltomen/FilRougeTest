@@ -20,6 +20,8 @@ class SecurityController extends AbstractController
             'last_username' => $authenticationUtils->getLastUsername(),
             'error' => $authenticationUtils->getLastAuthenticationError(),
         ]);
+        
+        
     }
 
     #[Route('/deconnexion', 'app_logout')]

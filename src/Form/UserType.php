@@ -24,7 +24,7 @@ class UserType extends AbstractType
                     'class' => 'form-control',
                     'minlength' => '2',
                     'maxlength' => '50',
-                    'placeholder' => 'Choisissez un pseudo',
+                    'placeholder' => '',
                 ],
                 'label' => 'Pseudo (Falcultatif)',
                 'label_attr' => [
@@ -38,7 +38,7 @@ class UserType extends AbstractType
                     'class' => 'form-control',
                     'minlength' => '2',
                     'maxlength' => '50',
-                    'placeholder' => 'Choisissez un pseudo',
+                    'placeholder' => '',
                 ],
                 'label' => 'Pseudo (Falcultatif)',
                 'label_attr' => [
