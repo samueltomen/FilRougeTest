@@ -10,6 +10,9 @@
     padding-bottom: 3rem !important;
 }
 
+.projectsPage{
+    border-radius: 5px;
+}
 .projectsPage:hover {
     background-color: #4b4949;
     color: #fff;

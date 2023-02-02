@@ -139,4 +139,16 @@ class UserController extends AbstractController
 
         return $this->render('user/account_user.html.twig');
     }
+    #[Route('/utilisateur/supression-de-compte/{id}', name: 'app_user_delete', methods: ['GET'])]
+    public function delete(
+        EntityManagerInterface $manager,
+        User $user
+    ): Response {
+        
+        $manager->remove($user);
+        $manager->flush();
+
+        $this->addFlash('danger', 'Votre projet à été supprimé');
+        return $this->redirectToRoute('app_login');
+    }
 }

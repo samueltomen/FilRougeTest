@@ -3,13 +3,13 @@
         Mes informations personnels
     </h1>
     <div class="list-group my-5 w-75">
-        <a href="#" class="list-group-item list-group-item-action">
+        <a href="{{path('app_user',{id:app.user.id})}}" class="list-group-item list-group-item-action">
             Modifier mes informations personnels
         </a>
-        <a href="#" class="list-group-item list-group-item-action">
+        <a href="{{path('app_user_password',{id:app.user.id})}}" class="list-group-item list-group-item-action">
             Modifier le mot de passe
         </a>
-        <a href="#" class="list-group-item text-white list-group-item-action bg-danger">
+        <a href="{{path('app_user_delete',{id:app.user.id})}}" class="list-group-item text-white list-group-item-action bg-danger" onClick="return confirm('Êtes-vous sur de vouloir supprimer votre compte {% if app.user.pseudo %}{{ app.user.pseudo }}{% else %}{{ app.user.firstname }}{% endif %}?');">
             Supprimer mon compte
         </a>
     </div>
