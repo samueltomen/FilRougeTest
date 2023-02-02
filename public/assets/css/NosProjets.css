@@ -1,48 +1,52 @@
 @import url('./Main.css');
 
-*{
+* {
     font-family: 'Bahnschrift';
 }
 
-#ourprojects{
+#ourprojects {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
     padding-bottom: 3rem !important;
 }
 
-h1{
+.projectsPage:hover {
+    background-color: #4b4949;
+    color: #fff;
+}
+
+h1 {
     text-align: center;
     text-decoration: underline;
     font-weight: bold;
     color: #51ade5;
 }
 
-#ourprojects .row{
+#ourprojects .row {
     padding-top: 2em;
 }
 
-#ourprojects h1{
+#ourprojects h1 {
     padding-top: 2em;
     color: #4b4949;
 }
 
-.row{
+.row {
     --bs-gutter-x: 0em;
 }
 
-#ourprojects .card{
+#ourprojects .card {
     box-shadow: 2px 5px 5px rgb(217, 225, 228);
     margin: 0px 20px;
     border-radius: 5px;
     width: 400px;
-    
 }
 
-.card-title{
+.card-title {
     margin-bottom: 5px;
 }
 
-.card-img-top{
+.card-img-top {
     border-top-right-radius: var(--bs-card-inner-border-radius-none);
     border-top-left-radius: var(--bs-card-inner-border-radius-none);
 }
@@ -52,15 +56,14 @@ h1{
 
 /* --------------- Footer ------------------ */
 
-
-.slogan_footer h1{
+.slogan_footer h1 {
     text-align: left;
     margin: 0;
 }
 
-footer a{
+footer a {
     color: #4b4949;
 }
-footer a:hover{
+footer a:hover {
     color: #51ade5;
 }

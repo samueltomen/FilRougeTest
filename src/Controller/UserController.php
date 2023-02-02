@@ -22,7 +22,6 @@ class UserController extends AbstractController
             methods: ['GET', 'POST']
         )
     ]
-    
     public function index(
         User $user,
         Request $request,
@@ -36,7 +35,6 @@ class UserController extends AbstractController
         if ($this->getUser() !== $user) {
             return $this->redirectToRoute('app_user');
         }
-        
 
         $form = $this->createForm(UserType::class, $user);
 
@@ -81,6 +79,14 @@ class UserController extends AbstractController
         EntityManagerInterface $manager,
         UserPasswordHasherInterface $hasher
     ): Response {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+
+        if ($this->getUser() !== $user) {
+            return $this->redirectToRoute('app_user');
+        }
+
         $form = $this->createForm(UserPasswordType::class, $user);
         $form->handleRequest($request);
 
@@ -117,14 +123,12 @@ class UserController extends AbstractController
             methods: ['GET', 'POST']
         )
     ]
-    
     public function account(
         User $user,
         Request $request,
         EntityManagerInterface $manager,
         UserPasswordHasherInterface $hasher
     ): Response {
-        
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
         }

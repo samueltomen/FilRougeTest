@@ -51,6 +51,9 @@
                                             Mise à jour le {{ projet.updatedAt|date('jS F \\a\\t g:ia', 'Europe/Paris') }}
                                         </small>
                                     </p>
+                                    <a href="" class="card-link projectsPage">
+                                        Plus d'informations
+                                    </a>
                                     {% if is_granted('ROLE_ADMIN') %}
                                         <div class="btn-crud d-flex mx-auto">
                                             <a href="{{
