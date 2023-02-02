@@ -10,11 +10,11 @@
     padding-bottom: 3rem !important;
 }
 
-.projectsPage{
+.projectsPage {
     border-radius: 5px;
 }
 .projectsPage:hover {
-    background-color: #4b4949;
+    background-color: #bc986a;
     color: #fff;
 }
 
@@ -25,7 +25,7 @@ h1 {
     color: #51ade5;
 }
 
-.progress-bar{
+.progress-bar {
     background-color: #51ade5;
 }
 

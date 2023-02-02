@@ -150,4 +150,12 @@ class ProjetController extends AbstractController
         $this->addFlash('danger', 'Votre projet à été supprimé');
         return $this->redirectToRoute('app_projets');
     }
+
+    #[Route("/projet/{id}", name: "app_projet_description",methods: ['GET'])]
+    public function projetsShow(Projets $projets): Response
+    {
+        return $this->render("projet/show.html.twig", [
+            "projet" => $projets
+        ]);
+    }
 }

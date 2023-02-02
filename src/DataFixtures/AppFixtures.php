@@ -30,8 +30,8 @@ class AppFixtures extends Fixture
             $number++;
             $projet = new Projets();
             $projet
-                ->setTitle($this->faker->sentence(5))
-                ->setDescription($this->faker->text(200))
+                ->setTitle($this->faker->sentence(8))
+                ->setDescription($this->faker->text(500))
                 ->setImage('./assets/img/image_card_' . $number . 'r.png');
 
             $projets[] = $projet;

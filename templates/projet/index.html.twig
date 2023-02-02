@@ -46,8 +46,8 @@
                                     <p class="card-text text-center">
                                         {{ projet.description }}
                                     </p>
-                                    <span>Dons</span>
-                                    <div class="progress w-50 my-2">
+                                    <span class="mt-2">Dons :</span>
+                                    <div class="progress w-75 mt-2 mb-4">
                                             <div class="progress-bar progress-bar-striped progress-bar-animated"
                                                 role="progressbar"
                                                 aria-label="Total Donation"
@@ -57,7 +57,7 @@
                                                 style="width: {{projet.average * 20}}%">
                                             </div>
                                     </div>
-                                    <a href=""
+                                    <a href="{{path('app_projet_description', {id:projet.id})}}"
                                         class="card-link projectsPage my-3">
                                         Plus d'informations
                                     </a>
