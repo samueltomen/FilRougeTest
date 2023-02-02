@@ -3,18 +3,18 @@
 {% block title %}{{projet.title}} - Harpie {% endblock %}
 
 {% block body %}
-    <div class="container d-flex flex-column text-center my-5 col-md-6">
+    <div class="container my-5 col-md-5">
             <h1>{{projet.title}}</h1>
-            <img src="{{projet.image}}"/>
-        <div class="card-description mx-auto col-md-6 mt-3">
+        <img src=".{{projet.image}}" width="250px" class="card-img-top my-5"/>
+        <div class="card-description col-md-12 mt-3">
             <p>
             {{projet.description}}
             </p>
             <p class="mt-5">
                 Totals des dons pour ce projet
-            <hr class="mx-auto">
+            <hr class="">
             </p>
-                <div class="progress mx-auto col-md-4 mb-5">
+                <div class="progress col-md-4 mb-5">
                                             <div class="progress-bar progress-bar-striped progress-bar-animated"
                                                 role="progressbar"
                                                 aria-label="Total Donation"
