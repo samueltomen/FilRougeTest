@@ -25,6 +25,10 @@ h1 {
     color: #51ade5;
 }
 
+.progress-bar{
+    background-color: #51ade5;
+}
+
 #ourprojects .row {
     padding-top: 2em;
 }

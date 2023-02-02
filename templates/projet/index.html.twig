@@ -46,12 +46,19 @@
                                     <p class="card-text text-center">
                                         {{ projet.description }}
                                     </p>
-                                    <p class="card-text text-center">
-                                        <small class="text-muted">
-                                            Mise à jour le {{ projet.updatedAt|date('jS F \\a\\t g:ia', 'Europe/Paris') }}
-                                        </small>
-                                    </p>
-                                    <a href="" class="card-link projectsPage my-2">
+                                    <span>Dons</span>
+                                    <div class="progress w-50 my-2">
+                                            <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                                role="progressbar"
+                                                aria-label="Total Donation"
+                                                aria-valuenow="{{projet.average}}"
+                                                aria-valuemin="0"
+                                                aria-valuemax="5"
+                                                style="width: {{projet.average * 20}}%">
+                                            </div>
+                                    </div>
+                                    <a href=""
+                                        class="card-link projectsPage my-3">
                                         Plus d'informations
                                     </a>
                                     {% if is_granted('ROLE_ADMIN') %}
@@ -81,6 +88,11 @@
                                             </a>
                                         </div>
                                     {% endif %}
+                                    <p class="card-text text-center">
+                                        <small class="text-muted">
+                                            Mise à jour le {{ projet.updatedAt|date('jS F \\a\\t g:ia', 'Europe/Paris') }}
+                                        </small>
+                                    </p>
                                 </div>
                             </div>
                         </div>
