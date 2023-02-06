@@ -24,9 +24,9 @@ class UserType extends AbstractType
                     'class' => 'form-control',
                     'minlength' => '2',
                     'maxlength' => '50',
-                    'placeholder' => '',
+                    'placeholder' => 'Mon prénom',
                 ],
-                'label' => 'Pseudo (Falcultatif)',
+                'label' => 'Prénom',
                 'label_attr' => [
                     'class' => 'form-label mt-2',
                 ],
@@ -38,9 +38,9 @@ class UserType extends AbstractType
                     'class' => 'form-control',
                     'minlength' => '2',
                     'maxlength' => '50',
-                    'placeholder' => '',
+                    'placeholder' => 'Mon nom',
                 ],
-                'label' => 'Pseudo (Falcultatif)',
+                'label' => 'Nom',
                 'label_attr' => [
                     'class' => 'form-label mt-2',
                 ],
@@ -62,7 +62,7 @@ class UserType extends AbstractType
                 'constraints' => [new Assert\Length(['min' => 2, 'max' => 50])],
             ])
             ->add('plainPassword', PasswordType::class, [
-                'label' => 'Mot de passe',
+                'label' => 'Entrez votre mot de passe pour confirmer',
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Votre mot de passe',

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Contact - Harpie
+{% endblock %}
+
+{% block body %}
+    <div class="container col-md-6 my-5">
+        <h1 class"my-5">Formulaire de contact</h1>
+        {{ form(form) }}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success mt-4">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

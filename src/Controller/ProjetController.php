@@ -43,7 +43,7 @@ class ProjetController extends AbstractController
             $manager->persist($projets);
             $manager->flush();
 
-            $this->addFlash('success', 'Votre projet à été créé avec succès');
+            $this->addFlash('success', 'Votre message a bien été transmis');
 
             return $this->redirectToRoute('app_projets');
         }

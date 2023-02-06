@@ -15,5 +15,18 @@
             </div>
         {% endfor %}
         {{ form(form) }}
+        <div class="backButton col-md-2 mx-auto my-5">
+            <a class="btn btn-secondary"
+                href="{{
+                path(
+                    'app_account',
+                    {
+                        id: app.user.id
+                    }
+                )
+                }}">
+                Retourner à mon compte
+            </a>
+        </div>
     </div>
 {% endblock %}
