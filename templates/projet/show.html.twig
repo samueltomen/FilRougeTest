@@ -9,7 +9,7 @@
         <h1>
             {{ projet.title }}
         </h1>
-        <img src=".{{ projet.image }}"
+        <img src="{{ vich_uploader_asset(projet, 'imageFile') }}"
             width="250px"
             class="card-img-top my-5" />
         <div class="card-description col-md-12 mt-3">

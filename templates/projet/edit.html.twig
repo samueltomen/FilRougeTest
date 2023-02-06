@@ -2,7 +2,6 @@
 
 {% block body %}
     <div class="container col-md-6">
-        
         <h1 class="mt-4">
             Modification du projet
         </h1>
@@ -24,9 +23,8 @@
         </div>
 
         <div class="form-group">
-            {{ form_label(form.image) }}
-            {{ form_widget(form.image) }}
-            {{ form_errors(form.image) }}
+            {{ form_row(form.imageFile) }}
+            {{ form_errors(form.imageFile) }}
         </div>
 
         <div class="form-group">

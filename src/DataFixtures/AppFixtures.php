@@ -31,8 +31,8 @@ class AppFixtures extends Fixture
             $projet = new Projets();
             $projet
                 ->setTitle($this->faker->sentence(8))
-                ->setDescription($this->faker->text(500))
-                ->setImage('./assets/img/image_card_' . $number . 'r.png');
+                ->setDescription($this->faker->text(500));
+            // ->setImageFile('./assets/img/image_card_' . $number . 'r.png');
 
             $projets[] = $projet;
             $manager->persist($projet);
@@ -57,18 +57,18 @@ class AppFixtures extends Fixture
         }
 
         //Mark
-        foreach ($projets as $projet) {
-            for ($i = 0; $i < mt_rand(0, 4); $i++) {
-                $mark = new Mark();
-                $mark
-                    ->setMark(mt_rand(1, 5))
-                    ->setUser($users[mt_rand(0, count($users) - 1)])
-                    ->setProjet($projet);
+        // foreach ($projets as $projet) {
+        //     for ($i = 0; $i < mt_rand(0, 4); $i++) {
+        //         $mark = new Mark();
+        //         $mark
+        //             ->setMark(mt_rand(1, 5))
+        //             ->setUser($users[mt_rand(0, count($users) - 1)])
+        //             ->setProjet($projet);
 
-                $manager->persist($mark);
-            }
-        }
-        
+        //         $manager->persist($mark);
+        //     }
+        // }
+
         $manager->flush();
     }
 }

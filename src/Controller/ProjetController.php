@@ -12,7 +12,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-// use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
@@ -38,33 +37,8 @@ class ProjetController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $imageFile = $form->get('image')->getData();
-            if ($imageFile) {
-                $originalFilename = pathinfo(
-                    $imageFile->getClientOriginalName(),
-                    PATHINFO_FILENAME
-                );
-                $safeFilename = transliterator_transliterate(
-                    'Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()',
-                    $originalFilename
-                );
-                $newFilename =
-                    $safeFilename .
-                    '-' .
-                    uniqid() .
-                    '.' .
-                    $imageFile->guessExtension();
-
-                try {
-                    $imageFile->move(
-                        $this->getParameter('upload_directory'),
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
-                }
-                $projets->setImage($newFilename);
-            }
+            
+            
             $projets = $form->getData();
             $manager->persist($projets);
             $manager->flush();
@@ -95,33 +69,6 @@ class ProjetController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $imageFile = $form->get('image')->getData();
-            if ($imageFile) {
-                $originalFilename = pathinfo(
-                    $imageFile->getClientOriginalName(),
-                    PATHINFO_FILENAME
-                );
-                $safeFilename = transliterator_transliterate(
-                    'Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()',
-                    $originalFilename
-                );
-                $newFilename =
-                    $safeFilename .
-                    '-' .
-                    uniqid() .
-                    '.' .
-                    $imageFile->guessExtension();
-
-                try {
-                    $imageFile->move(
-                        $this->getParameter('upload_directory'),
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
-                }
-                $projets->setImage($newFilename);
-            }
             $projets = $form->getData();
             $manager->persist($projets);
             $manager->flush();

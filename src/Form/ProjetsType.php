@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\Entity\Projets;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -12,6 +11,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\File;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ProjetsType extends AbstractType
 {
@@ -23,17 +23,12 @@ class ProjetsType extends AbstractType
             ->add('title', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'minlenght' => '5',
-                    'maxlenght' => '100',
                 ],
                 'label' => 'Titre',
                 'label_attr' => [
                     'class' => 'form-label mt-4',
                 ],
-                'constraints' => [
-                    new Assert\Length(['min' => 5, 'max' => 50]),
-                    new Assert\NotBlank(),
-                ],
+                'constraints' => [new Assert\NotBlank()],
             ])
             ->add('description', TextareaType::class, [
                 'attr' => [
@@ -44,9 +39,9 @@ class ProjetsType extends AbstractType
                     'class' => 'form-label mt-4',
                 ],
             ])
-            ->add('image', FileType::class, [
+            ->add('imageFile', VichImageType::class, [
                 'required' => false,
-                'mapped' => false,
+                'label' => 'Image du projet',
                 'attr' => [
                     'class' => 'form-control mb-4',
                 ],
@@ -58,7 +53,7 @@ class ProjetsType extends AbstractType
                         'maxSize' => '5000k',
                         'mimeTypes' => ['image/jpeg', 'image/png'],
                         'mimeTypesMessage' =>
-                        'Please upload a valid image file',
+                            'Please upload a valid image file',
                     ]),
                 ],
             ])
