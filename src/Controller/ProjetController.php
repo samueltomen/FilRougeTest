@@ -2,16 +2,19 @@
 
 namespace App\Controller;
 
+use App\Entity\Mark;
+use App\Form\MarkType;
 use App\Entity\Projets;
 use App\Form\ProjetsType;
+use App\Repository\MarkRepository;
 use App\Repository\ProjetsRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
+// use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class ProjetController extends AbstractController
 {
@@ -23,8 +26,8 @@ class ProjetController extends AbstractController
         ]);
     }
 
-    #[Route('/projet/nouveau', 'projet_new', methods: ['GET', 'POST'])]
     // #[IsGranted('ROLE_ADMIN')]
+    #[Route('/projet/nouveau', 'projet_new', methods: ['GET', 'POST'])]
     public function new(
         Request $request,
         EntityManagerInterface $manager
@@ -143,7 +146,6 @@ class ProjetController extends AbstractController
         EntityManagerInterface $manager,
         Projets $projets
     ): Response {
-        
         $manager->remove($projets);
         $manager->flush();
 
@@ -151,11 +153,48 @@ class ProjetController extends AbstractController
         return $this->redirectToRoute('app_projets');
     }
 
-    #[Route("/projet/{id}", name: "app_projet_description",methods: ['GET'])]
-    public function projetsShow(Projets $projets): Response
-    {
-        return $this->render("projet/show.html.twig", [
-            "projet" => $projets
+    #[
+        Route(
+            '/projet/{id}',
+            name: 'app_projet_description',
+            methods: ['GET', 'POST']
+        )
+    ]
+    public function projetsShow(
+        Projets $projets,
+        Request $request,
+        MarkRepository $markRepository,
+        EntityManagerInterface $manager
+    ): Response {
+        $mark = new Mark();
+        $form = $this->createForm(MarkType::class, $mark);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $mark->setUser($this->getUser())->setProjet($projets);
+            $existingMark = $markRepository->findOneBy([
+                'user' => $this->getUser(),
+                'projet' => $projets,
+            ]);
+            if (!$existingMark) {
+                $manager->persist($mark);
+            } else {
+                $existingMark->setMark($form->getData()->getMark());
+            }
+
+            $manager->flush();
+
+            $this->addFlash('success', 'Votre note a bien été prise en compte');
+
+            return $this->redirectToRoute('app_projet_description', [
+                'id' => $projets->getId(),
+            ]);
+        }
+
+        return $this->render('projet/show.html.twig', [
+            'projet' => $projets,
+            'form' => $form->createView(),
         ]);
     }
 }
