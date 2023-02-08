@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Contact;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -41,7 +42,7 @@ class ContactType extends AbstractType
                 'label_attr' => ['class' => 'form-label mt-4'],
                 'constraints' => [new Assert\NotBlank()],
             ])
-            ->add('message', TextareaType::class, [
+            ->add('message', CKEditorType::class, [
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Entrez votre message ici',

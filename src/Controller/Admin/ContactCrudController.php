@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Contact;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -20,13 +21,16 @@ class ContactCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('firstName'),
-            TextField::new('lastName'),
-            TextField::new('email'),
-            TextEditorField::new('message')
-                ->setFormType(CKEditorType::class),
-            DateTimeField::new('createdAt'),
+            IdField::new('id')->hideOnForm(),
+            TextField::new('firstName', 'Prénom'),
+            TextField::new('lastName', 'Nom'),
+            TextField::new('email', 'Email')->setFormTypeOption(
+                'disabled',
+                'disabled'
+            ),
+            TextField::new('subject', 'Sujet'),
+            TextEditorField::new('message'),
+            DateTimeField::new('createdAt', 'Date/Heure')->hideOnForm(),
         ];
     }
 }
