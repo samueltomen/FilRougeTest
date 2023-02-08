@@ -42,7 +42,7 @@ class ContactType extends AbstractType
                 'label_attr' => ['class' => 'form-label mt-4'],
                 'constraints' => [new Assert\NotBlank()],
             ])
-            ->add('message', CKEditorType::class, [
+            ->add('message', TextareaType::class, [
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Entrez votre message ici',
