@@ -1,7 +1,17 @@
 {% extends '@EasyAdmin/page/content.html.twig' %}
 
 {% block content %}
-    <h1>
-        Administrateur
-    </h1>
+    <div class="text-center mt-4">
+        <h1 class="text-center">
+            Administrateur
+        </h1>
+        <h2>
+            Ici vous retrouverez toute l'interface administrative du site web
+            Harpie
+        </h2>
+        <a href="{{ path('app_home') }}"
+            class="btn btn-outline-custom btn-sm btn-read-more position-relative top-50">
+            Retourner à l'accueil du site
+        </a>
+    </div>
 {% endblock %}
