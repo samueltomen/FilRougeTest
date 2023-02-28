@@ -52,16 +52,18 @@ class UserController extends AbstractController
                 $manager->flush();
 
                 $this->addFlash(
-                    'success',
-                    'Vos informations ont bien été modifiés '
+                    type: 'success',
+                    message: 'Vos informations ont bien été modifiés '
                 );
-                return $this->redirectToRoute('app_projets');
+                return $this->redirectToRoute(route: 'app_account', parameters: [
+                    'id' => $user->getId(),
+                ]);
             } else {
-                $this->addFlash('danger', 'Le mot de passe est incorrect');
+                $this->addFlash(type: 'danger', message: 'Le mot de passe est incorrect');
             }
         }
 
-        return $this->render('user/edit.html.twig', [
+        return $this->render(view: 'user/edit.html.twig', parameters: [
             'form' => $form->createView(),
         ]);
     }
@@ -139,12 +141,17 @@ class UserController extends AbstractController
 
         return $this->render('user/account_user.html.twig');
     }
-    #[Route('/utilisateur/supression-de-compte/{id}', name: 'app_user_delete', methods: ['GET'])]
+    #[
+        Route(
+            '/utilisateur/supression-de-compte/{id}',
+            name: 'app_user_delete',
+            methods: ['GET']
+        )
+    ]
     public function delete(
         EntityManagerInterface $manager,
         User $user
     ): Response {
-        
         $manager->remove($user);
         $manager->flush();
 
